@@ -1,4 +1,4 @@
-name: Tests
+name: Rubocop
 
 on:
   push:
@@ -23,5 +23,5 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Run the default task
-        run: bundle exec rake spec
+      - name: Run rubocop
+        run: bundle exec rake rubocop
