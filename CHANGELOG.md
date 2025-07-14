@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+
+- List all MDM servers in an organisation
+
 ## 0.1.2 - 2025-07-14
 
 ### Added
