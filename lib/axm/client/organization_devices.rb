@@ -11,7 +11,7 @@ module Axm
       # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
       # See: https://developer.apple.com/documentation/appleschoolmanagerapi/get-org-devices
       def list_org_devices(options = {})
-        get('/v1/organization/devices', options)
+        get("v1/orgDevices", options)
       end
     end
   end
