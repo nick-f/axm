@@ -8,6 +8,8 @@ require 'axm/client/organization_devices'
 
 module Axm
   class Client
+    include OrganizationDevices
+
     # Initializes a new instance of the AXM client.
     #
     # @param private_key [String] The private key used for authentication.
