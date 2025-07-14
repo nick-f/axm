@@ -4,6 +4,46 @@ A Ruby wrapper around the Apple Business Manager (ABM) and Apple School Manager 
 
 This gem is heavily inspired by [Octokit](https://github.com/octokit/octokit.rb) and [Oktakit](https://github.com/Shopify/oktakit). If you're familiar with those libraries, you should feel right at home.
 
+## Installation
+
+Install the gem and add to the application's Gemfile by executing:
+
+```bash
+bundle add axm
+```
+
+If bundler is not being used to manage dependencies, install the gem by executing:
+
+```bash
+gem install axm
+```
+
+## Usage
+
+First, generate API credentials from the Apple Business Manager or Apple School Manager portal and store the credentials in a secure location accessible to your app.
+
+With the credentials handy, you can create an instance of the client:
+
+```ruby
+private_key = File.read('path/to/your/private_key.pem')
+issuer_id = 'your_issuer_id'
+key_id = 'your_key_id'
+
+client = Axm::Client.new(private_key:, issuer_id:, key_id:)
+```
+
+You're now ready to make API requests.
+
+```ruby
+client.list_org_devices
+```
+
+For any endpoints that don't currently exist in the gem, you can use the `get` or `post` method directly to make API requests
+
+```ruby
+client.get('/v1/some/endpoint', { limit: 10 })
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
