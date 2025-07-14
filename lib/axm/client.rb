@@ -5,9 +5,11 @@ require 'securerandom'
 require 'time'
 
 require 'axm/client/organization_devices'
+require 'axm/client/mdm_servers'
 
 module Axm
   class Client
+    include MdmServers
     include OrganizationDevices
 
     # Initializes a new instance of the AXM client.
