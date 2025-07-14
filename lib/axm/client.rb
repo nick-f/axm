@@ -95,7 +95,6 @@ module Axm
 
       response_body = response.first if response.last.to_i == 200
 
-      require 'pry'; binding.pry
       token = response_body.merge!({ 'expires_at' => Time.now.utc + response_body['expires_in'] })
 
       Secret.write('stub_access_token', token.to_json)
@@ -153,22 +152,9 @@ module Axm
 
       response_json = JSON.parse(response.body)
 
-      require 'pry'; binding.pry
       raise 'Invalid request' if response_json['error'] == 'invalid_request'
 
       [response_json, response.code]
-    end
-
-    # Fetches a list of organization devices from Apple Business Manager.
-    #
-    # @param limit [Integer] Maximum number of devices to return (default: 100).
-    # @param paginate [Boolean] Whether to paginate through all results (default: false).
-    # @param fields [Array<String>] Optional fields to include in the response. (default: all fields are returned)
-    # @return [Hash] The API response containing organization devices.
-    #
-    # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
-    def org_devices(limit: 100, paginate: false, fields: [])
-      get('v1/orgDevices', limit:, paginate:, fields:)
     end
   end
 end
