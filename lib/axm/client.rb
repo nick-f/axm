@@ -4,6 +4,8 @@ require 'net/http'
 require 'securerandom'
 require 'time'
 
+require 'axm/client/organization_devices'
+
 module Axm
   class Client
     # Initializes a new instance of the AXM client.
