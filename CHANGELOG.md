@@ -3,6 +3,8 @@
 ### Added
 
 - List all MDM servers in an organisation
+- Show all device IDs assigned to a specific MDM server
+- Show which MDM server a device is assigned to
 
 ## 0.1.2 - 2025-07-14
 
