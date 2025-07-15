@@ -4,9 +4,9 @@ require 'net/http'
 require 'securerandom'
 require 'time'
 
-require 'axm/client/organization_devices'
 require 'axm/client/mdm_servers'
 require 'axm/client/organization_device_activities'
+require 'axm/client/organization_devices'
 
 module Axm
   class Client
