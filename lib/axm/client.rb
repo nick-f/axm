@@ -89,15 +89,7 @@ module Axm
         return cached_access_token unless token_expired
       end
 
-      params = {
-        grant_type: 'client_credentials',
-        client_id: @client_id,
-        client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-        client_assertion: client_assertion,
-        scope: "#{scope}.api"
-      }
-
-      response = post('https://account.apple.com/auth/oauth2/v2/token', params)
+      response = exchange_access_token_request
 
       response_body = response.first if response.last.to_i == 200
 
@@ -141,20 +133,27 @@ module Axm
       JSON.parse(res.body)
     end
 
-    # Sends a POST request to the specified URI with given parameters.
+    # Sends a POST request to exchange the credentials for an access token.
     #
-    # @param uri [String, URI] The endpoint URI.
-    # @param params [Hash] Parameters to include in the request body.
-    # @return [Net::HTTPResponse] The HTTP response object.
-    def post(uri, params = {})
-      uri = URI(uri) if uri.is_a?(String)
+    # @return [Net::HTTPResponse, integer] The HTTP response object and status code.
+    def exchange_access_token_request
+      uri = URI('https://account.apple.com/auth/oauth2/v2/token')
+
+      request_body = {
+        grant_type: 'client_credentials',
+        client_id: @client_id,
+        client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+        client_assertion: client_assertion,
+        scope: "#{scope}.api"
+      }
+
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == 'https'
 
       request = Net::HTTP::Post.new(uri)
       request['Host'] = uri.host
       request['Content-Type'] = 'application/x-www-form-urlencoded'
-      request.body = URI.encode_www_form(params) unless params.empty?
+      request.body = URI.encode_www_form(request_body)
 
       response = http.request(request)
 
@@ -165,6 +164,31 @@ module Axm
       raise 'Invalid request' if response_json['error'] == 'invalid_request'
 
       [response_json, response.code]
+    end
+
+    # Sends a POST request to the specified URI with given parameters.
+    #
+    # @param uri [String, URI] The endpoint URI.
+    # @param request_body [Hash] Parameters to include in the request body.
+    # @return [Hash, Integer] The HTTP response object and status code.
+    def post(path, request_body = {})
+      uri = URI("https://#{api_domain}/#{path}")
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = uri.scheme == 'https'
+
+      request = Net::HTTP::Post.new(uri)
+      request['Host'] = uri.host
+      request['Content-Type'] = 'application/json'
+      request['Authorization'] = "Bearer #{access_token['access_token']}"
+
+      request.body = request_body.to_json unless request_body.empty?
+
+      response = http.request(request)
+
+      response_body = JSON.parse(response.body)
+
+      [response_body, response.code]
     end
   end
 end

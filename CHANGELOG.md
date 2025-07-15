@@ -7,6 +7,7 @@
 - Show which MDM server a device is assigned to
 - Show the ID of the MDM server a device is assigned to
 - Show information about the MDM server a device is assigned to
+- Assign and unassign devices to MDM servers
 
 ## 0.1.2 - 2025-07-14
 
