@@ -15,7 +15,7 @@ module Axm
 
       # Assigns a device to an MDM server.
       #
-      # @param device_id [String] The unique identifier of the device to be assigned.
+      # @param device_ids [Array<String>] Array of device IDs to be assigned.
       # @param mdm_server_id [String] The unique identifier of the MDM server to which the device will be assigned.
       # @return [Hash, Integer] The response from the POST method, containing details of the assignment and status code.
       def assign(device_id, mdm_server_id)
@@ -24,7 +24,7 @@ module Axm
 
       # Unassigns a device from an MDM server.
       #
-      # @param device_id [String] The unique identifier of the device to be assigned.
+      # @param device_ids [Array<String>] Array of device IDs to be unassigned.
       # @param mdm_server_id [String] The unique identifier of the MDM server to which the device will be assigned.
       # @return [Hash, Integer] The response from the POST method, containing details of the assignment and status code.
       def unassign(device_id, mdm_server_id)
@@ -35,11 +35,18 @@ module Axm
 
       # Sends a request to change the assignment of a device to an MDM server.
       #
-      # @param device_id [String] The unique identifier of the device.
+      # @param device_ids [Array<String>] Array of IDs of devices to be assigned or unassigned.
       # @param mdm_server_id [String] The unique identifier of the MDM server.
-      # @param activity_type [String] The type of activity being performed (e.g., "ASSIGN_DEVICES", "UNASSIGN_DEVICES").
+      # @param activity_type [String] The type of activity being performed ("ASSIGN_DEVICES" or "UNASSIGN_DEVICES").
       # @return [Hash, Integer] The response from the POST request, containing details of the operation and status code.
-      def assignment_change(device_id, mdm_server_id, activity_type)
+      def assignment_change(device_ids, mdm_server_id, activity_type)
+        devices = device_ids.map do |device_id|
+          {
+            type: "orgDevices",
+            id: device_id
+          }
+        end
+
         request_body = {
           data: {
             type: "orgDeviceActivities",
@@ -54,12 +61,7 @@ module Axm
                 }
               },
               devices: {
-                data: [
-                  {
-                    type: "orgDevices",
-                    id: device_id
-                  }
-                ]
+                data: devices
               }
             }
           }
