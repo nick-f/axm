@@ -6,10 +6,12 @@ require 'time'
 
 require 'axm/client/organization_devices'
 require 'axm/client/mdm_servers'
+require 'axm/client/organization_device_activities'
 
 module Axm
   class Client
     include MdmServers
+    include OrganizationDeviceActivities
     include OrganizationDevices
 
     # Initializes a new instance of the AXM client.
