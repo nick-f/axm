@@ -4,12 +4,14 @@ require 'net/http'
 require 'securerandom'
 require 'time'
 
-require 'axm/client/organization_devices'
 require 'axm/client/mdm_servers'
+require 'axm/client/organization_device_activities'
+require 'axm/client/organization_devices'
 
 module Axm
   class Client
     include MdmServers
+    include OrganizationDeviceActivities
     include OrganizationDevices
 
     # Initializes a new instance of the AXM client.
@@ -116,8 +118,10 @@ module Axm
     def get(path, options = {})
       options = options.dup
 
-      endpoint = path.split('/').last
+      # API endpoints are prefixed with 'v1', so we can extract the endpoint from the path.
+      endpoint = path.split('/')[1]
 
+      # For the cases where the fields_key is different to the path component, it can be overriden as an option.
       fields_key = options.delete(:fields_key) || endpoint
 
       fields = options.delete(:fields)
