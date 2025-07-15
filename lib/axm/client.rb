@@ -165,5 +165,30 @@ module Axm
 
       [response_json, response.code]
     end
+
+    # Sends a POST request to the specified URI with given parameters.
+    #
+    # @param uri [String, URI] The endpoint URI.
+    # @param request_body [Hash] Parameters to include in the request body.
+    # @return [Hash, Integer] The HTTP response object and status code.
+    def post(path, request_body = {})
+      uri = URI("https://#{api_domain}/#{path}")
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = uri.scheme == 'https'
+
+      request = Net::HTTP::Post.new(uri)
+      request['Host'] = uri.host
+      request['Content-Type'] = 'application/json'
+      request['Authorization'] = "Bearer #{access_token['access_token']}"
+
+      request.body = request_body.to_json unless request_body.empty?
+
+      response = http.request(request)
+
+      response_body = JSON.parse(response.body)
+
+      [response_body, response.code]
+    end
   end
 end
