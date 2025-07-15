@@ -118,8 +118,10 @@ module Axm
 
       endpoint = path.split('/').last
 
+      fields_key = options.delete(:fields_key) || endpoint
+
       fields = options.delete(:fields)
-      options["fields[#{endpoint}]"] = fields.join(',') if fields
+      options["fields[#{fields_key}]"] = fields.join(',') if fields
 
       uri = URI("https://#{api_domain}/#{path}")
       uri.query = URI.encode_www_form(options) unless options.empty?
