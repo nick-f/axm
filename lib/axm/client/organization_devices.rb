@@ -37,6 +37,22 @@ module Axm
       def assigned_mdm_server_id(device_id, options = {})
         get("v1/orgDevices/#{device_id}/relationships/assignedServer", options)
       end
+
+      # Fetch the assigned device management service information for a device.
+      #
+      # @param device_id [String] The unique identifier of the device.
+      # @param options [Hash] Optional query parameters to filter or paginate results.
+      #   - id: (String) The unique identifier of the device.
+      #   - fields: (Array) Array of fields to include in the response.
+      # @return [<Hash>] A hash containing the identifier of the device's assigned MDM server.
+      #
+      # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-server-information-for-an-orgdevice
+      # See: https://developer.apple.com/documentation/appleschoolmanagerapi/get-the-assigned-server-information-for-an-orgdevice
+      def assigned_mdm_server(device_id, options = {})
+        options[:fields_key] = "mdmServers"
+
+        get("v1/orgDevices/#{device_id}/assignedServer", options)
+      end
     end
   end
 end
