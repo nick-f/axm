@@ -53,6 +53,22 @@ module Axm
 
         get("v1/orgDevices/#{device_id}/assignedServer", options)
       end
+
+      # Fetch the AppleCare coverage information for a device.
+      #
+      # @param device_id [String] The unique identifier of the device.
+      # @param options [Hash] Optional query parameters to filter or paginate results.
+      #   - fields: (Array) Array of fields to include in the response.
+      #   - limit: (Integer) The number of included related resources to return (default: 100, maximum: 1000).
+      # @return [<Hash>] A hash containing the identifier of the device's assigned MDM server.
+      #
+      # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-apple-care-coverage-for-an-orgdevice
+      # See: https://developer.apple.com/documentation/appleschoolmanagerapi/get-all-apple-care-coverage-for-an-orgdevice
+      def applecare_coverage(device_id, options = {})
+        options[:fields_key] = "appleCareCoverage"
+
+        get("v1/orgDevices/#{device_id}/appleCareCoverage", options)
+      end
     end
   end
 end

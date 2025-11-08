@@ -162,6 +162,7 @@ module Axm
       response_json = JSON.parse(response.body)
 
       raise 'Invalid request' if response_json['error'] == 'invalid_request'
+      raise 'Invalid client ID or key ID' if response_json['error'] == 'invalid_client'
 
       [response_json, response.code]
     end
