@@ -63,7 +63,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 ## Releasing
 
 To release a new version:
-- update the version number in `version.rb`
+- update the version number in [lib/axm/version.rb](./lib/axm/version.rb)
 - update the changelog
 - commit all changes
 - run `bundle exec rake release`
