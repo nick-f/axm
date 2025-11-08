@@ -58,7 +58,17 @@ key_id = Secret.read('key_id')
 client = Axm::Client.new(private_key:, client_id:, key_id:)
 ```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
+
+## Releasing
+
+To release a new version:
+- update the version number in `version.rb`
+- update the changelog
+- commit all changes
+- run `bundle exec rake release`
+
+This will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
