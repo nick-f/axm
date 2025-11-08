@@ -1,4 +1,4 @@
-## [Unreleased]
+## 1.0.0 - 2025-11-08
 
 ### Added
 
@@ -8,6 +8,7 @@
 - Show the ID of the MDM server a device is assigned to
 - Show information about the MDM server a device is assigned to
 - Assign and unassign devices to MDM servers
+- Show AppleCare coverage information for devices
 
 ## 0.1.2 - 2025-07-14
 
