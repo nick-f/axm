@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Secret
   def self.read(filename)
     File.read("secrets/#{filename}").strip
