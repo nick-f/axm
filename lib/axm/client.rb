@@ -11,6 +11,7 @@ require 'axm/client/organization_device_activities'
 require 'axm/client/organization_devices'
 
 module Axm
+  # rubocop: disable Metrics/ClassLength
   class Client
     include MdmServers
     include OrganizationDeviceActivities
@@ -60,6 +61,7 @@ module Axm
       end
     end
 
+    # rubocop: disable Metrics/MethodLength
     def client_assertion
       @client_assertion ||= begin
         audience = 'https://account.apple.com/auth/oauth2/v2/token'
@@ -80,7 +82,9 @@ module Axm
         JWT.encode(payload, @private_key, algo, kid: @key_id)
       end
     end
+    # rubocop: enable Metrics/MethodLength
 
+    # rubocop: disable Metrics/MethodLength, Metrics/AbcSize
     def access_token
       cached_access_token = JSON.parse(Secret.read('stub_access_token')) if File.exist?('secrets/stub_access_token')
 
@@ -101,6 +105,7 @@ module Axm
 
       response_body
     end
+    # rubocop: enable Metrics/MethodLength, Metrics/AbcSize
 
     # Sends a GET request to the specified API endpoint.
     #
@@ -109,6 +114,7 @@ module Axm
     #   - :paginate [Boolean] Whether to paginate through all results (unused).
     #   - :fields [Array<String>] Optional fields to include as fields[orgDevices].
     # @return [Hash] The parsed JSON response.
+    # rubocop: disable Metrics/MethodLength, Metrics/AbcSize
     def get(path, options = {})
       options = options.dup
 
@@ -134,10 +140,12 @@ module Axm
 
       JSON.parse(res.body)
     end
+    # rubocop: enable Metrics/MethodLength, Metrics/AbcSize
 
     # Sends a POST request to exchange the credentials for an access token.
     #
     # @return [Net::HTTPResponse, integer] The HTTP response object and status code.
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def exchange_access_token_request
       uri = URI('https://account.apple.com/auth/oauth2/v2/token')
 
@@ -168,6 +176,7 @@ module Axm
 
       [response_json, response.code]
     end
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
     # Sends a POST request to the specified URI with given parameters.
     #
@@ -203,4 +212,5 @@ module Axm
       request
     end
   end
+  # rubocop: enable Metrics/ClassLength
 end
