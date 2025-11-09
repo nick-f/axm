@@ -66,7 +66,7 @@ module Axm
         algo = 'ES256'
 
         issued_at_timestamp = Time.now.utc.to_i
-        expiration_timestamp = issued_at_timestamp + 86_400 * 180 # 180 days
+        expiration_timestamp = issued_at_timestamp + (86_400 * 180) # 180 days
 
         payload = {
           sub: @client_id,
