@@ -11,6 +11,3 @@ Layout/LineLength:
 
 Style/Documentation:
   Enabled: false
-
-Style/StringLiteralsInInterpolation:
-  EnforcedStyle: double_quotes
