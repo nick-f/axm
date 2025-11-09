@@ -25,4 +25,3 @@ jobs:
           bundler-cache: true
       - name: Run rubocop
         run: bundle exec rake rubocop
-        continue-on-error: true
