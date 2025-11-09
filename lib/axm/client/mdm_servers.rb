@@ -11,7 +11,7 @@ module Axm
       # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-mdm-servers
       # See: https://developer.apple.com/documentation/appleschoolmanagerapi/get-mdm-servers
       def list_mdm_servers(options = {})
-        get("v1/mdmServers", options)
+        get('v1/mdmServers', options)
       end
 
       # Retrieves a list of IDs for the devices assigned to a specific MDM server.

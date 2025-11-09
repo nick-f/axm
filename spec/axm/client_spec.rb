@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "axm"
+require 'axm'
 
 RSpec.describe Axm::Client do
   # TODO

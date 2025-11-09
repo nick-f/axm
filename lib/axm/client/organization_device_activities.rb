@@ -19,7 +19,7 @@ module Axm
       # @param mdm_server_id [String] The unique identifier of the MDM server to which the device will be assigned.
       # @return [Hash, Integer] The response from the POST method, containing details of the assignment and status code.
       def assign(device_id, mdm_server_id)
-        assignment_change(device_id, mdm_server_id, "ASSIGN_DEVICES")
+        assignment_change(device_id, mdm_server_id, 'ASSIGN_DEVICES')
       end
 
       # Unassigns a device from an MDM server.
@@ -28,7 +28,7 @@ module Axm
       # @param mdm_server_id [String] The unique identifier of the MDM server to which the device will be assigned.
       # @return [Hash, Integer] The response from the POST method, containing details of the assignment and status code.
       def unassign(device_id, mdm_server_id)
-        assignment_change(device_id, mdm_server_id, "UNASSIGN_DEVICES")
+        assignment_change(device_id, mdm_server_id, 'UNASSIGN_DEVICES')
       end
 
       private
@@ -42,21 +42,21 @@ module Axm
       def assignment_change(device_ids, mdm_server_id, activity_type)
         devices = device_ids.map do |device_id|
           {
-            type: "orgDevices",
+            type: 'orgDevices',
             id: device_id
           }
         end
 
         request_body = {
           data: {
-            type: "orgDeviceActivities",
+            type: 'orgDeviceActivities',
             attributes: {
               activityType: activity_type
             },
             relationships: {
               mdmServer: {
                 data: {
-                  type: "mdmServers",
+                  type: 'mdmServers',
                   id: mdm_server_id
                 }
               },
@@ -67,7 +67,7 @@ module Axm
           }
         }
 
-        post("v1/orgDeviceActivities", request_body)
+        post('v1/orgDeviceActivities', request_body)
       end
     end
   end

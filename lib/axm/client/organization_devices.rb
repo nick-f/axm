@@ -11,7 +11,7 @@ module Axm
       # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
       # See: https://developer.apple.com/documentation/appleschoolmanagerapi/get-org-devices
       def list_org_devices(options = {})
-        get("v1/orgDevices", options)
+        get('v1/orgDevices', options)
       end
 
       # Retrieves information about a specific device in the organization.
@@ -49,7 +49,7 @@ module Axm
       # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-server-information-for-an-orgdevice
       # See: https://developer.apple.com/documentation/appleschoolmanagerapi/get-the-assigned-server-information-for-an-orgdevice
       def assigned_mdm_server(device_id, options = {})
-        options[:fields_key] = "mdmServers"
+        options[:fields_key] = 'mdmServers'
 
         get("v1/orgDevices/#{device_id}/assignedServer", options)
       end
@@ -65,7 +65,7 @@ module Axm
       # See: https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-apple-care-coverage-for-an-orgdevice
       # See: https://developer.apple.com/documentation/appleschoolmanagerapi/get-all-apple-care-coverage-for-an-orgdevice
       def applecare_coverage(device_id, options = {})
-        options[:fields_key] = "appleCareCoverage"
+        options[:fields_key] = 'appleCareCoverage'
 
         get("v1/orgDevices/#{device_id}/appleCareCoverage", options)
       end

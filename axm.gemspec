@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-require_relative "lib/axm/version"
+require_relative 'lib/axm/version'
 
 Gem::Specification.new do |spec|
-  spec.name = "axm"
+  spec.name = 'axm'
   spec.version = Axm::VERSION
-  spec.authors = ["nick-f"]
-  spec.email = ["nick@nickf.dev"]
+  spec.authors = ['nick-f']
+  spec.email = ['nick@nickf.dev']
 
-  spec.summary = "Gem to interact with the Apple Business Manager/Apple School Manager API"
-  spec.homepage = "https://github.com/nick-f/axm"
-  spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.1.0"
+  spec.summary = 'Gem to interact with the Apple Business Manager/Apple School Manager API'
+  spec.homepage = 'https://github.com/nick-f/axm'
+  spec.license = 'MIT'
+  spec.required_ruby_version = '>= 3.1.0'
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/nick-f/axm"
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/nick-f/axm'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -25,11 +25,11 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
     end
   end
-  spec.bindir = "exe"
+  spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_dependency "jwt", "~> 3.1"
+  spec.add_dependency 'jwt', '~> 3.1'
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
