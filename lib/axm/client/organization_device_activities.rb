@@ -41,6 +41,7 @@ module Axm
       # @param mdm_server_id [String] The unique identifier of the MDM server.
       # @param activity_type [String] The type of activity being performed ("ASSIGN_DEVICES" or "UNASSIGN_DEVICES").
       # @return [Hash, Integer] The response from the POST request, containing details of the operation and status code.
+      # rubocop:disable Metrics/MethodLength
       def assignment_change(device_ids, mdm_server_id, activity_type)
         devices = device_ids.map do |device_id|
           {
@@ -71,6 +72,7 @@ module Axm
 
         post('v1/orgDeviceActivities', request_body)
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
