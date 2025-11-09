@@ -177,13 +177,9 @@ module Axm
     def post(path, request_body = {})
       uri = URI("https://#{api_domain}/#{path}")
 
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = uri.scheme == 'https'
+      http = Net::HTTP.new(uri.host, uri.port, use_ssl: true)
 
-      request = Net::HTTP::Post.new(uri)
-      request['Host'] = uri.host
-      request['Content-Type'] = 'application/json'
-      request['Authorization'] = "Bearer #{access_token['access_token']}"
+      request = add_post_headers(Net::HTTP::Post.new(uri))
 
       request.body = request_body.to_json unless request_body.empty?
 
@@ -192,6 +188,19 @@ module Axm
       response_body = JSON.parse(response.body)
 
       [response_body, response.code]
+    end
+
+    private
+
+    # Adds necessary headers to a POST request.
+    #
+    # @return [Net::HTTP::Post] The modified request with added headers.
+    def add_post_headers(request)
+      request['Host'] = uri.host
+      request['Content-Type'] = 'application/json'
+      request['Authorization'] = "Bearer #{access_token['access_token']}"
+
+      request
     end
   end
 end
