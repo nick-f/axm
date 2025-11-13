@@ -29,4 +29,26 @@ RSpec.describe Axm::Client do
       it { expect { client.scope }.to raise_error(ArgumentError, 'Unknown client_id prefix: MYAPI') }
     end
   end
+
+  describe '#api_domain' do
+    before do
+      allow(client).to receive(:scope).and_return(scope)
+    end
+
+    context 'when the scope is for the Apple Business Manager API' do
+      let(:scope) { 'business' }
+
+      it 'returns the correct API domain for business scope' do
+        expect(client.api_domain).to eq('api-business.apple.com')
+      end
+    end
+
+    context 'when the scope is for the Apple School Manager API' do
+      let(:scope) { 'school' }
+
+      it 'returns the correct API domain for Apple School Manager API' do
+        expect(client.api_domain).to eq('api-school.apple.com')
+      end
+    end
+  end
 end
