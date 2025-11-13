@@ -1,3 +1,8 @@
+## 1.0.1 - 2025-11-13
+
+- Add OpenSSL as a dev dependency (<https://github.com/nick-f/axm/pull/26>)
+- Store the access token in memory (<https://github.com/nick-f/axm/pull/25>)
+
 ## 1.0.0 - 2025-11-08
 
 ### Added
