@@ -58,8 +58,6 @@ module Axm
         'api-business.apple.com'
       when 'school'
         'api-school.apple.com'
-      else
-        raise ArgumentError, "Unknown scope: #{scope}"
       end
     end
 
