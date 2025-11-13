@@ -35,14 +35,16 @@ module Axm
     # @return [String] The scope, either 'business' or 'school'.
     # @raise [ArgumentError] If the client_id prefix is unknown.
     def scope
+      client_id_prefix = @client_id&.split('.')&.first
+
       @scope ||=
-        case @client_id.split('.').first
+        case client_id_prefix
         when 'BUSINESSAPI'
           'business'
         when 'SCHOOLAPI'
           'school'
         else
-          raise ArgumentError, "Unknown client_id prefix: #{@client_id.split('.').first}"
+          raise ArgumentError, "Unknown client_id prefix: #{client_id_prefix}"
         end
     end
 
