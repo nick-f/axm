@@ -12,3 +12,7 @@ gem 'rspec', '~> 3.0'
 gem 'rubocop', '~> 1.21'
 gem 'rubocop-rake', require: false
 gem 'rubocop-rspec', require: false
+
+group :test do
+  gem 'timecop', '~> 0.9.10'
+end
