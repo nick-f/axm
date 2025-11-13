@@ -84,28 +84,22 @@ module Axm
     end
     # rubocop: enable Metrics/MethodLength
 
-    # rubocop: disable Metrics/MethodLength, Metrics/AbcSize
     def access_token
-      cached_access_token = JSON.parse(Secret.read('stub_access_token')) if File.exist?('secrets/stub_access_token')
-
-      if cached_access_token
-        token_expiration = Time.parse(cached_access_token['expires_at'])
+      if @cached_access_token
+        token_expiration = Time.parse(@cached_access_token['expires_at'])
         token_expired = Time.now.utc >= token_expiration
 
-        return cached_access_token unless token_expired
+        return @cached_access_token unless token_expired
       end
 
       response = exchange_access_token_request
 
       response_body = response.first if response.last.to_i == 200
 
-      token = response_body.merge!({ 'expires_at' => Time.now.utc + response_body['expires_in'] })
+      @cached_access_token = response_body.merge({ 'expires_at' => Time.now.utc + response_body['expires_in'] })
 
-      Secret.write('stub_access_token', token.to_json)
-
-      response_body
+      @cached_access_token
     end
-    # rubocop: enable Metrics/MethodLength, Metrics/AbcSize
 
     # Sends a GET request to the specified API endpoint.
     #
