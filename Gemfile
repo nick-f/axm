@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'irb'
+gem 'openssl', '~> 3.1', '>= 3.1.2' # https://github.com/ruby/openssl/issues/949#issuecomment-3370358680
 gem 'pry'
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.0'
