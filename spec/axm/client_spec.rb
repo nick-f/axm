@@ -51,4 +51,24 @@ RSpec.describe Axm::Client do
       end
     end
   end
+
+  describe '#client_assertion' do
+    before do
+      Timecop.freeze(DateTime.parse('January 24th, 2025 12:30:00'))
+    end
+
+    let(:decoded_token) { JWT.decode(client.client_assertion, nil, false).first }
+
+    it { expect(decoded_token['sub']).to eq client_id }
+    it { expect(decoded_token['iss']).to eq client_id }
+    it { expect(decoded_token['aud']).to eq 'https://account.apple.com/auth/oauth2/v2/token' }
+
+    it 'issues the token at the current time' do
+      expect(decoded_token['iat']).to eq 1_737_721_800
+    end
+
+    it 'expires in 180 days' do
+      expect(decoded_token['exp']).to eq 1_753_273_800
+    end
+  end
 end
