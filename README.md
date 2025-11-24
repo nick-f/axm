@@ -48,12 +48,12 @@ client.get('/v1/some/endpoint', { limit: 10 })
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-If the credentials are stored in the `secrets/` directory, you can use the `Secret.read` method to load them:
+If the credentials are stored in the `secrets/` directory, you can use the `Axm::Secret.read` method to load them:
 
 ```ruby
-private_key = Secret.read('private_key.pem')
-client_id = Secret.read('client_id')
-key_id = Secret.read('key_id')
+private_key = Axm::Secret.read('private_key.pem')
+client_id = Axm::Secret.read('client_id')
+key_id = Axm::Secret.read('key_id')
 
 client = Axm::Client.new(private_key:, client_id:, key_id:)
 ```
