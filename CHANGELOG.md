@@ -1,3 +1,9 @@
+## Unreleased
+
+### Fixed
+
+- Breaking: Move `Secret` methods to Axm namespace (<https://github.com/nick-f/axm/pull/30>)
+
 ## 1.0.1 - 2025-11-13
 
 - Add OpenSSL as a dev dependency (<https://github.com/nick-f/axm/pull/26>)
